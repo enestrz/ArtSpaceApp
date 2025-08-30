@@ -41,6 +41,8 @@ import androidx.compose.ui.unit.sp
 import com.example.artspaceapp.ui.theme.ArtSpaceAppTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.ui.draw.shadow
 
 // ArtItem nesnelerinden oluşan liste
@@ -101,41 +103,46 @@ fun ArtViewSection(
     artItem: ArtItem,
     modifier: Modifier = Modifier
 ) {
-    Column (
-        modifier = modifier.fillMaxHeight(),
+    Card(
+        elevation = CardDefaults.cardElevation(defaultElevation = 16.dp),
+        shape = RoundedCornerShape(16.dp),
+        modifier = modifier
+            .padding(8.dp)
     ) {
-        Box(
-            modifier = Modifier
-                .weight(1f)
-                .fillMaxWidth()
-//                .clip(RoundedCornerShape(10.dp))
-                .shadow(elevation = 8.dp, shape = RoundedCornerShape(10.dp))
+        Column(
+            modifier = Modifier.fillMaxHeight(),
         ) {
-            Image(
-                painter = painterResource(artItem.imageId),
-                contentDescription = artItem.imageId.toString(),
-                contentScale = ContentScale.Crop,
-                modifier = Modifier.fillMaxSize()
+            Box(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxWidth()
+            ) {
+                Image(
+                    painter = painterResource(artItem.imageId),
+                    contentDescription = artItem.imageId.toString(),
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier.fillMaxSize()
+                )
+            }
+            Text(
+                text = artItem.title,
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 16.dp)
+            )
+            Text(
+                text = artItem.artist,
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Normal,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 16.dp)
             )
         }
-        Text(
-            text = artItem.title,
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            textAlign = TextAlign.Center,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 16.dp)
-        )
-        Text(
-            text = artItem.artist,
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Normal,
-            textAlign = TextAlign.Center,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 16.dp)
-        )
     }
 
 }
